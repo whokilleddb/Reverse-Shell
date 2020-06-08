@@ -1,7 +1,7 @@
 import hashlib
 
 def check_password(my_socket):
-     password = input("[+] Enter Password : ")
+     password = input("[+] Enter Password : ")#Here Password = Whokilleddb
      passbytes = password.encode('utf-8')
      hashval = hashlib.sha1(passbytes).hexdigest()
      checksum = str(hashval)
