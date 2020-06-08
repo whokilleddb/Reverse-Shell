@@ -7,7 +7,7 @@ def check_password(my_socket):
      while i<3:
          opt = 3-i
          print(f"[+] {opt} Chance Remaining")
-         password = input("[+] Enter Password : ")
+         password = input("[+] Enter Password : ")#Here the password is : whokilleddb
          passbytes = password.encode('utf-8')
          hashval = hashlib.sha1(passbytes).hexdigest()
          checksum = str(hashval)
