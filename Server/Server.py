@@ -72,8 +72,6 @@ class ServerConnection :
                  full_file += chunk
                  break
              full_file += chunk
-         if check != -1:
-             full_file=full_file[:l]
         
          
          print("[+] Bytes Received")
@@ -81,6 +79,7 @@ class ServerConnection :
          with open(zipped_file,'wb') as file:
                  file.write(full_file)
          print ("[+] Received Successfully")
+
     
     def end_conn(self):
         self.client_conn.close()
