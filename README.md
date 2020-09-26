@@ -9,10 +9,10 @@ A command shell written in python which :
 
 ### To-Do List :
 
-####[1] Add Exception Handling
-####[2] Add Persistence
-####[3] REFACTOR ! REFACTOR ! REFACTOR !
-####[4] Prevent AV Detection ?
+#### [1] Add Exception Handling
+#### [2] Add Persistence
+#### [3] REFACTOR ! REFACTOR ! REFACTOR !
+#### [4] Prevent AV Detection ?
 
 ### Note :
 
