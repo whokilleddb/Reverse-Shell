@@ -7,8 +7,7 @@ DELIMETER = "<END_OF_RESULTS>"
 
 class ClientConnection :
      def __init__(self):
-        """Create TCP Socket
-        """
+        #Create TCP Socket
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         
      def CreateConnection(self , server_ip , server_port) :
