@@ -3,13 +3,13 @@
 # Reverse Shell For C&C In Python With Extended Functionality
 
 
-### PROBLEM STATEMENT
+## PROBLEM STATEMENT :
 In this project, we have created a *Reverse Shell for C&C in Python* with extended functionalities. A reverse shell is a type of shell in which the target machine communicates back to the attacking machine. The attacking machine has a listener port on which it receives the connection, which by using, code or command execution is achieved. In our project we have tried to go a step further and add a bit more functionality to our program to add more features to the standard reverse shell.
-![screenshot](/Images/img.jpeg)
+![screenshot](Images/img.jpeg)
  
 For example –  An attacker wants to perform post exploitation kung-fu on a compromised machine. A standard reverse shell would be limited to primitive command execution. Often , STDERR can terminate the remote session, which isn't a favourable scenario for a hacker. Here we have tried to solve these problems and provide a more stable C&C framework.
 
-### OVERVIEW-
+## OVERVIEW :
 We have created 2 sets of programs -
 
 ```
@@ -25,10 +25,13 @@ The Client Side Program has the IP, Port pair of the Hacker’s machine or an eq
 [+] Download Files From Victim
 [+] Capture Screenshot
 ```
+## MOTIVATION FOR CHOOSING THIS PARTICULAR TOPIC FOR THE PROJECT :
 
-### MOTIVATION FOR CHOOSING THIS PARTICULAR TOPIC FOR THE PROJECT-
 In Cyber security it is often noticed that Reverse Shells have a remediate functionality. So we have tried to create a combined solution which allows us to do multiple tasks on the victim’s machine.  standard reverse shell would be limited to primitive command execution. Often , STDERR can terminate the remote session, which isn't a favourable scenario for a hacker. Here we have tried to solve these problems and provide a more stable C&C framework.
 
-### Note :
+## Ideas and Discussion
 
-For the Screenshot feature to work , scrot must be installed on the Victim  !
+Discussion and sharing of ideas takes the [discussion](https://github.com/whokilleddb/Reverse-Shell/discussions) section. If you have run into a bug feel free to open new discussion before straightaway opening an issue.
+### Note :
+For the Screenshot feature to work , scrot must be installed on the Victim[for now]!
+
