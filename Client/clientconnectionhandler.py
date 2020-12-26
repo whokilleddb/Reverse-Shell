@@ -37,7 +37,7 @@ def clienthandler(my_socket):
              capture_screenshot(my_socket)
              continue
          
-         elif cmd == "quit" or cmd == "exit" or cmd == "99":
+         elif cmd=="5" or cmd == "quit" or cmd == "exit" or cmd == "99":
              break
          
          else:
