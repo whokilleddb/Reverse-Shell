@@ -133,8 +133,8 @@ def checkpass(my_socket):
 if __name__=="__main__":
 
     my_socket = ClientConnection()
-    ip = "127.0.0.1"
-    port = 8080
+    ip = "127.0.0.1" # Change This 
+    port = 8080 # Change This
 
     my_socket.CreateConnection(ip, port)
     print(f"[+] Connecting To Server at {ip} On Port {port}")
