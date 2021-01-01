@@ -11,8 +11,8 @@ class ServerConnection :
         """
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         
-    def CreateConnection(self  , port) :
-        self.server_ip = "127.0.0.1"
+    def CreateConnection(self, ip, port) :
+        self.server_ip = ip
         self.server_port = port
         
         self.socket.bind((self.server_ip,self.server_port))
